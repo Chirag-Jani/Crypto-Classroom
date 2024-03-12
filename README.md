@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# QUASAR2.0 PROJECT README
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## TOPIC: Smart Education 
 
-## Available Scripts
+- CryptoClassroom (CCR) is a platform where learners and educators can come together to earn rewards by teaching and learning
 
-In the project directory, you can run:
 
-### `npm start`
+## Features?
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Bonus ERC20 tokens on signup
+- Earn more Tokens on Creating Cources
+    - Via cource fees for educators
+    - Via completion of the cources for learners
+- Proof of learning NFTs creted by educators (designer to be added in future version)
+- Video cources (Single video supported as of now, playlist in future versions)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+## Implementation roadmap
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Smart contracts
+    - Token contract (CCR)
+    - Manager Contract 
+        - Auth (Signup & Login)
+        - Create Course
+        - Update Course
+        - Enroll in course
+        - Withdraw earnings 
+            - Can be native as well as CCR tokens
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Frontend
+    - Login & Signup page
+    - Homepage 
+        - Lists all the available courses for enrollment
+    - Profile page
+        - Available tokens and funds
+            - ETH / Matic / BNB
+            - CCR / USDT (future)
+    - Course Details page
+        - Shows Video (thumbnail only)
+        - Title
+        - Description
+        - Price
+        - Enroll NOW button
+    - Course page after Enrollment
+        - Video available to watch directly
+            - Keep track of played amount (optional)
+        - Mark complete and Earn rewards
