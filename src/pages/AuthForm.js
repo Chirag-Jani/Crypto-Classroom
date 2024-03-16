@@ -19,25 +19,7 @@ import Logo from "./../images/logo.jpg";
 import { useTheme } from "@mui/material/styles";
 import ConnectButton from "./../components/ConnectWallet";
 
-// import { Image } from '@mui/icons-material';
-// // Custom theme
-// const theme = createTheme({
-//     palette: {
-//         primary: { main: '#003366' },
-//         secondary: { main: '#33CCCC' },
-//         background: { paper: '#708090' },
-//     },
-//     // Additional theme customization here
-// });
-
 const useStyles = makeStyles((theme) => ({
-  // root: {
-  //     height: '100vh',
-  //     display: 'flex',
-  //     justifyContent: 'center',
-  //     alignItems: 'center',
-  //     background: `radial-gradient(circle at 50% 0%, ${theme.palette.primary.main}, ${theme.palette.secondary.main}, ${theme.palette.info.main})`,
-  // },
   container: {
     display: "flex",
     height: "100vh",
