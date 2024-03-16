@@ -3,7 +3,7 @@ pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract CCRToken is ERC20 {
+contract BoostCoin is ERC20 {
     string private _name;
     string private _symbol;
     uint256 private _totalSupply;
@@ -11,7 +11,7 @@ contract CCRToken is ERC20 {
     constructor() ERC20("Crypto Classroom", "CCR") {
         _name = "Crypto Classroom";
         _symbol = "CCR";
-        _totalSupply = 3_00_000 * 10**decimals();
+        _totalSupply = 3_00_000 * 10 ** decimals();
         _mint(msg.sender, _totalSupply);
     }
 
@@ -31,4 +31,3 @@ contract CCRToken is ERC20 {
         return _totalSupply;
     }
 }
-
