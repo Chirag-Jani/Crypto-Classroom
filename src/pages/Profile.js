@@ -6,27 +6,7 @@ import Box from "@mui/material/Box";
 import { Grid } from "@mui/material";
 import CourseItem from "../components/CourseItem";
 import cover from "./../images/bg_img.jpg";
-
-const useStyles = {
-  root: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    marginTop: "2rem",
-  },
-  paper: {
-    display: "flex",
-    alignItems: "center",
-    maxWidth: 600,
-    padding: "1rem",
-  },
-  avatar: {
-    width: "6rem",
-    height: "6rem",
-    marginRight: "1rem",
-  },
-};
+import CreateItemForm from "../components/CreateItemForm";
 
 const courses = [
   {
@@ -45,42 +25,6 @@ const courses = [
   {
     title: "Advanced Smart Contracts",
     author: "Alice Johnson",
-    rating: 4.8,
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    title: "Ethereum and Solidity",
-    author: "Mike Brown",
-    rating: 4.6,
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    title: "Decentralized Applications",
-    author: "Samantha Davis",
-    rating: 4.9,
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    title: "Crypto Trading Strategies",
-    author: "Chris Wilson",
-    rating: 4.4,
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    title: "Blockchain for Business",
-    author: "Emma White",
-    rating: 4.3,
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    title: "Security in Blockchain",
-    author: "David Johnson",
-    rating: 4.7,
-    image: "https://via.placeholder.com/150",
-  },
-  {
-    title: "The Future of Finance",
-    author: "Sarah Miller",
     rating: 4.8,
     image: "https://via.placeholder.com/150",
   },
@@ -116,10 +60,31 @@ const ProfilePage = () => {
   };
 
   return (
-    <Box sx={useStyles.root}>
-      <Paper sx={useStyles.paper} elevation={3}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+        marginTop: "2rem",
+      }}
+    >
+      <Paper
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          padding: "1rem",
+        }}
+        elevation={3}
+      >
         {/* Left side: Avatar */}
-        <Avatar sx={useStyles.avatar}>
+        <Avatar
+          sx={{
+            width: "6rem",
+            height: "6rem",
+            marginRight: "1rem",
+          }}
+        >
           {/* You can replace the placeholder avatar with the user's actual avatar */}
           {user.name && user.name.charAt(0).toUpperCase()}
         </Avatar>
@@ -141,6 +106,8 @@ const ProfilePage = () => {
           {/* Add more user information fields as needed */}
         </div>
       </Paper>
+
+      <CreateItemForm />
 
       <Box>
         <Grid container spacing={3}>
