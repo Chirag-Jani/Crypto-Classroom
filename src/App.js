@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import ProfilePage from "./pages/Profile";
 import Header from "./components/Header";
+import ProductDetails from "./pages/ProductDetails";
 
 function App() {
   return (
@@ -20,6 +21,8 @@ function App() {
           <Route path="/home" element={<Homepage />} />
           <Route path="/contact" element={<Homepage />} />
           <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/productDetails" element={<ProductDetails />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
           {/* <Route path="/about" element={<AboutScreen />} />
           <Route path="/contact" element={<ContactScreen />} /> */}
         </Routes>

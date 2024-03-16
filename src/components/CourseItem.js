@@ -9,6 +9,7 @@ import {
   Rating,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 
 const StyledCard = styled(Card)(({ theme }) => ({
   maxWidth: 345,
@@ -50,7 +51,7 @@ const CourseItem = ({ course }) => {
         <Typography variant="body2" color="text.primary">
           {course.price}
         </Typography>
-        <Button sx={{}} size="small" variant="contained" color="primary">
+        <Button component={Link} to={`/product/${course.id}`} sx={{}} size="small" variant="contained" color="primary">
           Enroll Now
         </Button>
       </CardActions>
