@@ -2,6 +2,8 @@ import { Box } from "@mui/material"
 import { Grid } from '@mui/material';
 import CourseItem from "../components/CourseItem";
 import cover from "./../images/bg_img.jpg";
+import Header from "../components/Header";
+import ImageCarousel from "../components/ImageCarousel";
 
 const courses = [
     {
@@ -61,9 +63,13 @@ const courses = [
     }
 ];
 
+
+
 const Homepage = () => {
     return (
         <Box>
+            <Header />
+            <ImageCarousel />
             <Grid container spacing={3}>
                 {courses.map((course, index) => (
                     <Grid item xs={12} sm={6} md={4} key={index}>

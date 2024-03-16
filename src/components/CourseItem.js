@@ -25,7 +25,7 @@ const CourseItem = ({ course }) => {
                 </Typography>
                 <Rating sx={{ marginTop: 1, marginLeft: -0.4 }} name="read-only" value={course.rating} readOnly />
             </CardContent>
-            <CardActions sx={{ display: 'flex', justifyContent: 'space-between', paddingRight: 2, paddingLeft: 2, paddingBottom: 1.5 }}>
+            <CardActions sx={{ display: 'flex', justifyContent: 'space-between', paddingRight: 2, paddingLeft: 2, paddingBottom: 1.5, marginTop: -2 }}>
                 <Typography variant="body2" color="text.primary">
                     {course.price}
                 </Typography>

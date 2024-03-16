@@ -31,6 +31,7 @@ function App() {
         <Routes>
           <Route path="/" element={<AuthForm />} />
           <Route path="/home" element={<Homepage />} />
+          <Route path="/contact" element={<Homepage />} />
           {/* <Route path="/about" element={<AboutScreen />} />
           <Route path="/contact" element={<ContactScreen />} /> */}
         </Routes>
