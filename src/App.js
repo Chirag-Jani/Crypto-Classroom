@@ -1,11 +1,8 @@
 import "./App.css";
-import ConnectButton from "./components/ConnectWallet";
-import CourseCard from "./components/CourseCard";
-import Footer from "./layout/Footer";
 import AuthForm from "./pages/AuthForm";
 // import CourseUpload from "./components/CourseUpload";
 
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
 import ProfilePage from "./pages/Profile";
 import Header from "./components/Header";

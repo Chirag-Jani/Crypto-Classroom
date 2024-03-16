@@ -49,7 +49,7 @@ const CreateItemForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Send form data to backend or handle it accordingly
-    console.log({ uid, tag, priceInMatic, videoFile, payWithMatic });
+    console.log({ uid, tag, priceInMatic, payWithMatic, videoLink });
     alert("Contract call here");
   };
 
@@ -73,7 +73,7 @@ const CreateItemForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={classes.form}>
+    <div>
       <TextField
         className={classes.input}
         type="file"
@@ -121,10 +121,15 @@ const CreateItemForm = () => {
         checked={payWithMatic}
         onChange={(e) => setPayWithMatic(e.target.checked)}
       />
-      <Button type="submit" variant="contained" color="primary">
+      <Button
+        type="submit"
+        variant="contained"
+        color="primary"
+        onClick={handleSubmit}
+      >
         Create Item
       </Button>
-    </form>
+    </div>
   );
 };
 
