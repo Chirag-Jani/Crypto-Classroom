@@ -2,6 +2,7 @@ import React from "react";
 import { AppBar, Toolbar, Button, Box, Typography } from "@mui/material";
 import { Link } from "react-router-dom";
 import Logo from "./../images/logo.jpg";
+import ConnectWallet from "./ConnectWallet";
 
 const Header = () => {
   return (
@@ -41,8 +42,9 @@ const Header = () => {
         </Box>
 
         {/* Logo */}
+        <ConnectWallet />
         <Link to={"/profile"}>
-          <Box sx={{ flexGrow: 0 }}>
+          <Box sx={{ flexGrow: 0, mx: 2 }}>
             <img
               src="https://www.svgrepo.com/show/170633/profile-user.svg"
               alt="Logo"
