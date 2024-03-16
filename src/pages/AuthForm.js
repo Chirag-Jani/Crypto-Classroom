@@ -62,6 +62,7 @@ const AuthForm = () => {
 
   const handleSubmit = () => {
     // API call logic here
+    console.log(userType);
   };
 
   return (

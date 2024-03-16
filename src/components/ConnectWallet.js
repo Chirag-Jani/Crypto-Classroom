@@ -51,6 +51,7 @@ createWeb3Modal({
 });
 
 const ConnectWallet = () => {
+  let acc = useWeb3ModalAccount();
   return (
     <div>
       <w3m-button />

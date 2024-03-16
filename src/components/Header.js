@@ -20,7 +20,7 @@ const Header = () => {
           justifyContent: "center",
         }}
       >
-        <Typography variant="h6" sx={{ flexGrow: 1 }}>
+        <Typography variant="h6" sx={{ flexGrow: 1 }} component={Link} to="/">
           {/* Replace with your main logo */}
           <img
             src={Logo}

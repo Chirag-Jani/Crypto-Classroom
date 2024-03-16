@@ -43,6 +43,7 @@ contract CCRManager is AccessControl {
         bytes32[] courses; // Changed to bytes32 array for gas optimization
         uint256 totalRewardsEarned;
         uint256 currentBalance;
+        uint createdAt;
     }
 
     enum Type {
@@ -80,6 +81,7 @@ contract CCRManager is AccessControl {
 
     mapping(bytes32 => Course) public courses; // Changed to bytes32 for gas optimization
     mapping(bytes32 => mapping(address => bool)) public isStudentEnrolled; // Changed to bytes32 for gas optimization
+    Course[] allCourses;
 
     /**
      * @dev Modifier to restrict function access to instructors only.
@@ -114,7 +116,8 @@ contract CCRManager is AccessControl {
             usertype: selectedType,
             courses: new bytes32[](0), // Initialize as bytes32 array for gas optimization
             totalRewardsEarned: 100,
-            currentBalance: 100
+            currentBalance: 100,
+            createdAt: block.timestamp
         });
         if (selectedType == Type.Instructor) {
             grantRole(INSTRUCTOR_ROLE, msg.sender);
@@ -185,6 +188,7 @@ contract CCRManager is AccessControl {
         });
         courses[_uid] = newCourse;
         emit CourseCreated(_uid, msg.sender, _videoLink); // Emit the video link along with the event
+        allCourses.push(newCourse);
         return newCourse;
     }
 
@@ -273,5 +277,9 @@ contract CCRManager is AccessControl {
             ccrCoin.transfer(msg.sender, totalRewards),
             "Failed to transfer earnings"
         );
+    }
+
+    function getAllCourses() public view returns (Course[] memory) {
+        return allCourses;
     }
 }
