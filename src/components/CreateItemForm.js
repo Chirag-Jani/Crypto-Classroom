@@ -1,39 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import { makeStyles } from "@mui/styles";
+import { ethers } from "ethers";
 import axios from "axios";
+import { Box } from "@mui/material";
 
-const useStyles = makeStyles({
-  form: {
-    display: "flex",
-    flexDirection: "column",
-    gap: "1rem",
-    maxWidth: 400,
-    margin: "auto",
-    padding: "1rem",
-    border: "1px solid #ccc",
-    borderRadius: "8px",
-    color: "white",
-  },
-  input: {
-    display: "none",
-  },
-  fileInputWrapper: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: "0.5rem",
-    borderRadius: "4px",
-  },
-  fileName: {
-    marginLeft: "1rem",
-  },
-});
-
-const CreateItemForm = () => {
+const CreateItemForm = ({ CCRManagerAddress, CCRManagerABI }) => {
   const [uid, setUid] = useState("");
   const [tag, setTag] = useState("");
   const [priceInMatic, setPriceInMatic] = useState("");
@@ -46,14 +20,30 @@ const CreateItemForm = () => {
     setVideoFile(file);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Send form data to backend or handle it accordingly
     console.log({ uid, tag, priceInMatic, payWithMatic, videoLink });
-    alert("Contract call here");
-  };
+    alert("Make allow some amount of tokens first");
 
-  const classes = useStyles();
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = await provider.getSigner();
+
+    const contract = new ethers.Contract(
+      CCRManagerAddress,
+      CCRManagerABI,
+      signer
+    );
+    const newCourse = await contract.createCourse(
+      Number(uid),
+      2,
+      1,
+      videoLink, // Added video link parameter
+      false // Added bo
+    );
+
+    console.log(newCourse);
+  };
 
   const uploadVideo = async () => {
     try {
@@ -67,31 +57,40 @@ const CreateItemForm = () => {
       });
 
       setVideoLink(res.data.res.link);
+      console.log(res.data.res.link);
     } catch (e) {
       console.log(e);
     }
   };
 
   return (
-    <div>
+    <Box
+      sx={{
+        margin: "100px",
+      }}
+    >
       <TextField
-        className={classes.input}
         type="file"
         inputProps={{ accept: "video/*" }}
         onChange={handleFileChange}
       />
-      <div className={classes.fileInputWrapper}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          padding: "0.5rem",
+          borderRadius: "4px",
+        }}
+      >
         <label htmlFor="video-file-input">
           <Button variant="outlined" component="span" onClick={uploadVideo}>
             Upload Video
           </Button>
         </label>
-        {videoFile && (
-          <span className={classes.fileName}>{videoFile.name}</span>
-        )}
+        {videoFile && <span>{videoFile.name}</span>}
       </div>
       <TextField
-        className={classes.input}
         label="UID"
         variant="outlined"
         value={uid}
@@ -99,7 +98,6 @@ const CreateItemForm = () => {
         fullWidth
       />
       <TextField
-        className={classes.input}
         label="Tag"
         variant="outlined"
         value={tag}
@@ -107,7 +105,6 @@ const CreateItemForm = () => {
         fullWidth
       />
       <TextField
-        className={classes.input}
         label="Price in Matic"
         variant="outlined"
         type="number"
@@ -129,7 +126,7 @@ const CreateItemForm = () => {
       >
         Create Item
       </Button>
-    </div>
+    </Box>
   );
 };
 

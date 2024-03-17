@@ -3,7 +3,7 @@ pragma solidity ^0.8.24;
 
 import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract BoostCoin is ERC20 {
+contract CCR is ERC20 {
     string private _name;
     string private _symbol;
     uint256 private _totalSupply;
@@ -29,5 +29,15 @@ contract BoostCoin is ERC20 {
 
     function totalSupply() public view override returns (uint256) {
         return _totalSupply;
+    }
+}
+
+contract UIntToBytesConverter {
+    function convertToBytes(uint256 _num) external pure returns (bytes memory) {
+        bytes memory _bytes = new bytes(32);
+        assembly {
+            mstore(add(_bytes, 32), _num)
+        }
+        return _bytes;
     }
 }

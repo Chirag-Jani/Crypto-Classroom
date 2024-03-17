@@ -1,12 +1,10 @@
 import React from "react";
 import {
   Card,
-  CardMedia,
   CardContent,
   Typography,
   Button,
   CardActions,
-  Rating,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { Link } from "react-router-dom";
@@ -19,25 +17,37 @@ const StyledCard = styled(Card)(({ theme }) => ({
 const CourseItem = ({ course }) => {
   return (
     <StyledCard sx={{ marginLeft: 4, marginTop: 2 }}>
-      <CardMedia
-        component="img"
-        height="140"
-        image={course.image}
-        alt={course.title}
-      />
       <CardContent>
         <Typography gutterBottom variant="h6" component="div">
-          {course.title}
+          Course ID:{" "}
+          <Link
+            to={{
+              pathname: `/product/${course.uid}`,
+              state: { course: course }, // Pass the course object as state
+            }}
+            style={{ color: "inherit" }}
+          >
+            {course.uid}
+          </Link>
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {course.author}
+          Creator: {course.creator}
         </Typography>
-        <Rating
-          sx={{ marginTop: 1, marginLeft: -0.4 }}
-          name="read-only"
-          value={course.rating}
-          readOnly
-        />
+        <Typography variant="body2" color="text.secondary">
+          Price in Matic: {course.priceInMatic.toString()}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Status: {course.status}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Tag: {course.tag}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Video Link:{" "}
+          <a href={course.videoLink} target="_blank" rel="noopener noreferrer">
+            {course.videoLink}
+          </a>
+        </Typography>
       </CardContent>
       <CardActions
         sx={{
@@ -48,11 +58,17 @@ const CourseItem = ({ course }) => {
           paddingBottom: 1.5,
         }}
       >
-        <Typography variant="body2" color="text.primary">
-          {course.price}
-        </Typography>
-        <Button component={Link} to={`/product/${course.id}`} sx={{}} size="small" variant="contained" color="primary">
-          Enroll Now
+        <Button
+          component={Link}
+          to={{
+            pathname: `/product/${course.uid}`,
+            state: { course: course }, // Pass the course object as state
+          }}
+          size="small"
+          variant="contained"
+          color="primary"
+        >
+          View Details
         </Button>
       </CardActions>
     </StyledCard>

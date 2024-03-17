@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { makeStyles } from "@mui/styles";
 import {
   Box,
   Card,
@@ -11,44 +10,15 @@ import {
   Button,
   FormControl,
   FormLabel,
+  Avatar,
 } from "@mui/material";
-import cover from "./../images/bg_img.jpg";
+
 import Metamask from "./../images/metamask.jpg";
-import Avatar from "@mui/material/Avatar";
 import Logo from "./../images/logo.jpg";
-import { useTheme } from "@mui/material/styles";
 import ConnectButton from "./../components/ConnectWallet";
+import { ethers } from "ethers";
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    display: "flex",
-    height: "100vh",
-  },
-  imageSide: {
-    flex: 1,
-    backgroundImage: "url(/bg_img.jpg)", // Replace with your image path
-    backgroundSize: "cover",
-  },
-  formSide: {
-    flex: 1,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  card: {
-    // padding: theme.spacing(4),
-    minWidth: 300,
-  },
-  formControl: {
-    // margin: theme.spacing(2, 0),
-  },
-  button: {
-    // margin: theme.spacing(2, 0),
-  },
-}));
-
-const AuthForm = () => {
-  const classes = useStyles();
+const AuthForm = ({ CCRManagerABI, CCRManagerAddress, setLoggedInUser }) => {
   const [formType, setFormType] = useState("login");
   const [userType, setUserType] = useState("");
 
@@ -60,24 +30,37 @@ const AuthForm = () => {
     setUserType(event.target.value);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     // API call logic here
     console.log(userType);
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const signer = await provider.getSigner();
+
+    const contract = new ethers.Contract(
+      CCRManagerAddress,
+      CCRManagerABI,
+      signer
+    );
+    if (formType !== "login") {
+      const auth = await contract.signup(userType === "learner" ? 0 : 1);
+      setLoggedInUser(auth);
+    } else {
+      const auth = await contract.login();
+      console.log(auth);
+    }
   };
 
   return (
-    // <MuiThemeProvider theme={theme}>
     <Box
       sx={{
         display: "flex",
         height: "100vh",
-        flex: 1,
       }}
     >
       <Box
         sx={{
           flex: 1,
-          // backgroundImage: `url(${cover})`, // Replace with your image path
           backgroundSize: "cover",
           justifyContent: "center",
           alignItems: "center",
@@ -104,7 +87,7 @@ const AuthForm = () => {
           flexDirection: "column",
           padding: 2,
           background:
-            "linear-gradient(to right, rgba(0, 51, 102, 1) 30%, rgba(51, 204, 204, 0.8) 190%, rgba(112, 128, 144, 1) 50%)",
+            "linear-gradient(to right, rgba(0, 51, 102, 1) 30%, rgba(51, 204, 204, 0.8) 90%, rgba(112, 128, 144, 1) 50%)",
           // Adjust padding as needed
         }}
       >
@@ -117,11 +100,11 @@ const AuthForm = () => {
             padding: 2,
           }}
         >
-          <FormControl component="fieldset" className={classes.formControl}>
+          <FormControl component="fieldset" sx={{ marginY: 2 }}>
             <FormLabel
               sx={{
-                marginTop: 24,
-                marginBottom: 4,
+                marginTop: 2,
+                marginBottom: 1,
                 paddingTop: 2,
                 fontWeight: 700,
                 fontSize: 24,
@@ -162,7 +145,6 @@ const AuthForm = () => {
             </Select>
           </FormControl>
 
-          {/* <Button variant="contained" sx={{ marginBottom: 1.5 }} onClick={() => { }}>Connect Metamask</Button> */}
           <ConnectButton />
           <Button
             startIcon={
@@ -182,7 +164,6 @@ const AuthForm = () => {
         </Card>
       </Box>
     </Box>
-    // </MuiThemeProvider>
   );
 };
 

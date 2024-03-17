@@ -11,12 +11,12 @@ contract CCRManager is AccessControl {
     address payable admin = payable(msg.sender);
 
     IERC20 ccrCoin;
-    uint256 public tokenToMaticRate = 10; // 1 token = 0.1 matic
+    uint256 public tokenToMaticRate = 100; // 1 token = 0.01 matic
 
     // Roles
-    bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
-    bytes32 public constant INSTRUCTOR_ROLE = keccak256("INSTRUCTOR_ROLE");
-    bytes32 public constant LEARNER_ROLE = keccak256("LEARNER_ROLE");
+    // bytes32 public constant ADMIN_ROLE = keccak256("ADMIN_ROLE");
+    // bytes32 public constant INSTRUCTOR_ROLE = keccak256("INSTRUCTOR_ROLE");
+    // bytes32 public constant LEARNER_ROLE = keccak256("LEARNER_ROLE");
 
     // Events
     event CourseCreated(bytes32 uid, address creator, string videoLink);
@@ -34,7 +34,6 @@ contract CCRManager is AccessControl {
 
     constructor(address _ccrCoin) {
         ccrCoin = IERC20(_ccrCoin);
-        grantRole(ADMIN_ROLE, msg.sender);
     }
 
     struct User {
@@ -87,10 +86,10 @@ contract CCRManager is AccessControl {
      * @dev Modifier to restrict function access to instructors only.
      */
     modifier onlyInstructor() {
-        require(
-            hasRole(INSTRUCTOR_ROLE, msg.sender),
-            "Caller is not an instructor"
-        );
+        // require(
+        //     hasRole(INSTRUCTOR_ROLE, msg.sender),
+        //     "Caller is not an instructor"
+        // );
         _;
     }
 
@@ -98,7 +97,7 @@ contract CCRManager is AccessControl {
      * @dev Modifier to restrict function access to learners only.
      */
     modifier onlyLearner() {
-        require(hasRole(LEARNER_ROLE, msg.sender), "Caller is not a learner");
+        // require(hasRole(LEARNER_ROLE, msg.sender), "Caller is not a learner");
         _;
     }
 
@@ -119,11 +118,11 @@ contract CCRManager is AccessControl {
             currentBalance: 100,
             createdAt: block.timestamp
         });
-        if (selectedType == Type.Instructor) {
-            grantRole(INSTRUCTOR_ROLE, msg.sender);
-        } else {
-            grantRole(LEARNER_ROLE, msg.sender);
-        }
+        // if (selectedType == Type.Instructor) {
+        //     grantRole(INSTRUCTOR_ROLE, msg.sender);
+        // } else {
+        //     grantRole(LEARNER_ROLE, msg.sender);
+        // }
     }
 
     /**

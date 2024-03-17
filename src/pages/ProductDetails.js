@@ -1,36 +1,91 @@
 import React from "react";
+import { Box, Typography, Rating, Chip, Button } from "@mui/material";
 import { useParams } from "react-router-dom";
-// import { getCourseById } from './courseDataService'; // This is a hypothetical function
-import { Box, Typography, Rating } from "@mui/material";
+import { ethers } from "ethers";
 
-const ProductDetails = () => {
-  let { id } = useParams();
-  // const course = getCourseById(id); // Fetch course data based on the ID
+const ProductDetails = ({
+  allCourses,
+  CCRManagerABI,
+  CCRManagerAddress,
+  CCRTokenAddress,
+  CCRTokenABI,
+}) => {
+  const { id } = useParams();
+  const course = allCourses?.find((c) => c.uid === id);
 
-  console.log("id::;", id);
+  const handleEnrollCourse = async () => {
+    try {
+      const provider = new ethers.providers.Web3Provider(window.ethereum);
+      const signer = await provider.getSigner();
+
+      const contract = new ethers.Contract(
+        CCRManagerAddress,
+        CCRManagerABI,
+        signer
+      );
+
+      // Determine the payment method based on _payWithMatic
+      const transaction = await contract.enrollCourse(
+        course.uid,
+        5,
+        5,
+        false // Pass true or false based on the payment method
+      );
+
+      // Wait for the transaction to be mined
+      await transaction.wait();
+
+      console.log("Enrollment successful");
+    } catch (error) {
+      console.error("Error enrolling in course:", error);
+    }
+  };
 
   return (
     <Box sx={{ p: 3 }}>
-      <iframe
+      <video
         width="100%"
         height="315"
-        // src={`https://www.youtube.com/embed/${course.videoId}`} // Replace with your video link
-        src={`https://www.youtube.com/watch?v=BTRVFZVZTP8`} // Replace with your video link
-        title="YouTube video player"
+        src={course.videoLink}
+        controls
+        title="Course Video"
         frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowFullScreen
-      ></iframe>
+      ></video>
       <Typography variant="h4" sx={{ mt: 2 }}>
-        {/* {course.title} */} ABCkdjkjf
+        {course.uid?.slice(0, 5)}...{course.uid?.slice(course.uid?.length - 3)}
       </Typography>
-      <Typography variant="subtitle1">
-        {/* by {course.author} */} by kdnfkjsn
+      <Typography variant="subtitle1">Creator: {course.creator}</Typography>
+      <Typography variant="body1" sx={{ mt: 1 }}>
+        Price in Matic: {course.priceInMatic.toString()}
       </Typography>
       <Typography variant="body1" sx={{ mt: 1 }}>
-        {/* {course.description} */} jndfjkkjsnf dfjn
+        Status: {course.status}
+      </Typography>
+      <Typography variant="body1" sx={{ mt: 1 }}>
+        Tag:{" "}
+        <Chip
+          label={course.tag}
+          variant="outlined"
+          color="primary"
+          size="small"
+          sx={{ ml: 1 }}
+        />
+      </Typography>
+      <Typography variant="body1" sx={{ mt: 1 }}>
+        Video Link: {course.videoLink}
       </Typography>
       <Rating name="read-only" value={4} readOnly sx={{ mt: 1 }} />
+      <br />
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleEnrollCourse}
+        sx={{ mt: 2 }}
+      >
+        Enroll in Course
+      </Button>
     </Box>
   );
 };

@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { Grid } from "@mui/material";
 import CourseItem from "../components/CourseItem";
 import cover from "./../images/bg_img.jpg";
-import ImageCarousel from "../components/ImageCarousel";
+// import ImageCarousel from "../components/ImageCarousel";
 
 const courses = [
   {
@@ -71,17 +71,25 @@ const courses = [
   },
 ];
 
-
-const Homepage = () => {
+const Homepage = ({ allCourses }) => {
   return (
     <Box>
-      <ImageCarousel />
-      <Typography sx={{ color: 'white', justifyContent: 'center', display: 'flex', alignItems: 'center', marginTop: 3 }} variant="h2">Explor Courses</Typography>
+      {/* <ImageCarousel /> */}
+      <Typography
+        sx={{
+          color: "white",
+          justifyContent: "center",
+          display: "flex",
+          alignItems: "center",
+          marginTop: 3,
+        }}
+        variant="h2"
+      >
+        Explor Courses
+      </Typography>
 
       <Grid container spacing={3}>
-
-
-        {courses.map((course, index) => (
+        {allCourses.map((course, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <CourseItem course={course} />
           </Grid>

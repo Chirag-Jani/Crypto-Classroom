@@ -30,7 +30,7 @@ const courses = [
   },
 ];
 
-const ProfilePage = () => {
+const ProfilePage = ({ loggedInUser }) => {
   const user = {
     name: "John Doe",
     address: "1234 Main St, City, Country",
