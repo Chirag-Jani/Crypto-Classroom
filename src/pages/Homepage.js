@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Grid } from "@mui/material";
 import CourseItem from "../components/CourseItem";
 import cover from "./../images/bg_img.jpg";
@@ -76,7 +76,11 @@ const Homepage = () => {
   return (
     <Box>
       <ImageCarousel />
+      <Typography sx={{ color: 'white', justifyContent: 'center', display: 'flex', alignItems: 'center', marginTop: 3 }} variant="h2">Explor Courses</Typography>
+
       <Grid container spacing={3}>
+
+
         {courses.map((course, index) => (
           <Grid item xs={12} sm={6} md={4} key={index}>
             <CourseItem course={course} />
