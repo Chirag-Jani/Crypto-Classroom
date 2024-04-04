@@ -27,7 +27,8 @@ const CourseItem = ({ course }) => {
             }}
             style={{ color: "inherit" }}
           >
-            {course.uid}
+            {course.uid?.slice(0, 5)}...
+            {course.uid?.slice(course.uid?.length - 3)}
           </Link>
         </Typography>
         <Typography variant="body2" color="text.secondary">
@@ -45,7 +46,8 @@ const CourseItem = ({ course }) => {
         <Typography variant="body2" color="text.secondary">
           Video Link:{" "}
           <a href={course.videoLink} target="_blank" rel="noopener noreferrer">
-            {course.videoLink}
+            {course.videoLink?.slice(0, 15)}..{" "}
+            {course.videoLink?.slice(course.videoLink?.length - 5)}
           </a>
         </Typography>
       </CardContent>
